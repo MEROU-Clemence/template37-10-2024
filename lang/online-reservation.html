@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.BookTitle}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{MetaDescriptionOnlineReservation}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlOnlineBooking}}" />
+    <meta property="og:url" content="{{UrlOnlineBooking}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.BookTitle}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{MetaDescriptionOnlineReservation}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+    {{#HasBookingActivated}}{{>ScriptCalendarClick}}{{/HasBookingActivated}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+    {{>Header}}
+
+    <main>
+        <!-- SECTION BANNER -->
+        <section class="section-title-BG bg-img" style="background-image: url(https://static.elloha.com/webgen/img/online-reservation.jpg)" alt="{{NamePhoto}}">
+            <div class="opacity">
+                <div class="content-section big-title-contain">
+                    <h1 class="big-title hidden-title">{{ResourcesTemplate.Bookings}}</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION WIDGET BE -->
+        {{#HasBookingActivated}}
+        <section class="section">
+            <div id="section-BE" class="content-section section-BE-online-reservation">
+                <div class="check-availability content-section">
+                    <div class="rounded-box">
+                        {{>Widget-BE}}
+                        {{>Widget-BE-secure}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{/HasBookingActivated}}
+
+        <!-- SECTION CALENDAR -->
+        {{#HasCalendarActivated}}
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        <!-- SECTION HORAIRES -->
+        {{#isActivity}}
+        <section class="section-hours">
+            <div class="img-paysage-hours bg-img" style="background-image: url({{Url}}/img/paysage-neige.jpg);" alt="{{NamePhoto}}"></div>
+
+            <div class="section">
+                <div class="content-section">
+
+                    {{#IsRestaurant}}
+                    <div class="section-title">
+                        <h2>{{ResourcesTemplate.OpeningHours}}</h2>
+                    </div>
+                    {{/IsRestaurant}}
+
+                    <div class="horaires-big-contain">
+                        {{^IsRestaurant}}
+                        <img class="img-hours" src="{{#Photos.1}}{{UrlMedias}}/crop-800x600/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.1}}" alt="{{NamePhoto}}">
+                        {{/IsRestaurant}}
+
+                        <div class="horaires-solo">
+                            {{^IsRestaurant}}
+                            <div class="section-title section-title-in-horaires">
+                                <h2>{{ResourcesTemplate.OpeningHours}}</h2>
+                            </div>
+                            {{/IsRestaurant}}
+
+                            <div class="section-infos">
+                                {{#Openings}}
+                                <div class="text-infos">
+                                    <div class="day-horaire"><strong>{{DayLabel}}</strong></div>
+                                    <div>-</div>
+                                    <div>
+                                        {{#IsClosed}}{{ResourcesTemplate.Closed}}{{/IsClosed}}
+                                        {{^IsClosed}}{{#HasBreak}}{{StartHourBeforeBreak}} - {{EndHourBeforeBreak}} / {{StartHourAfterBreak}} - {{EndHourAfterBreak}}{{/HasBreak}}{{/IsClosed}}
+                                        {{^IsClosed}}{{^HasBreak}}{{StartHour}} - {{EndHour}}{{/HasBreak}}{{/IsClosed}}
+                                    </div>
+                                </div>
+                                {{/Openings}}
+                            </div>
+                        </div>
+
+                        {{#IsRestaurant}}
+                        <div class="infos-resto-contain {{#IsRestaurant}}border-hours{{/IsRestaurant}} {{^IsRestaurant}}{{/IsRestaurant}}">
+                            <div class="section-infos-2">
+                                <div class="subtitle-horaires"><strong>{{ResourcesTemplate.OurFood}} : </strong></div>
+                                <div class="info-sub-horaires">{{RestaurantType}} ({{#cookingTypes}}{{LibelleService}}<span class="separator-cuisine">, </span>{{/cookingTypes}})</div>
+                            </div>
+
+                            {{#NbCutlery}}
+                            <div class="section-infos-2">
+                                <div class="subtitle-horaires"><strong>{{ResourcesTemplate.MaxCapacity}}</strong></div>
+                                <div class="info-sub-horaires">{{NbCutlery}} {{ResourcesTemplate.Seats}}{{#NbCutleryTerrasse}}, {{ResourcesTemplate.Including}} {{NbCutleryTerrasse}} {{ResourcesTemplate.OutCutlery}}{{/NbCutleryTerrasse}}</div>
+                            </div>
+                            {{/NbCutlery}}
+                            {{#NbRooms}}
+                            <div class="section-infos-2">
+                                <div class="subtitle-horaires"><strong>{{NbRooms}} {{ResourcesTemplate.Halls}}{{#NbRoomsClim}}, {{ResourcesTemplate.Including}} {{NbRoomsClim}} {{ResourcesTemplate.Heated(s)}}{{/NbRoomsClim}} : </strong></div>
+                                {{#DescRoom}}
+                                <div class="info-sub-horaires">{{DescRoom}}</div>
+                                {{/DescRoom}}
+                            </div>
+                            {{/NbRooms}}
+                            {{#NbMeetingRooms}}
+                            <div class="section-infos-2">
+                                <div class="subtitle-horaires"><strong>{{NbMeetingRooms}} {{ResourcesTemplate.MeetingRooms}} : </strong></div>
+                                {{#NbCapaMax}}
+                                <div class="info-sub-horaires">{{ResourcesTemplate.MaxCapacity}} {{NbCapaMax}} {{ResourcesTemplate.CapacityPersons}}</div>
+                                {{/NbCapaMax}}
+                            </div>
+                            {{/NbMeetingRooms}}
+                        </div>
+                        {{/IsRestaurant}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{/isActivity}}
+
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    
+</body>
+</html>

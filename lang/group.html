@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{CurrentGroupePrestation.TitreGroupe}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{CustomTitle}} - {{CurrentGroupePrestation.TitreGroupe}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlOffers}}" />
+    <meta property="og:url" content="{{UrlOffers}}" />
+    <meta property="og:title" content="{{CurrentGroupePrestation.TitreGroupe}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{CustomTitle}} - {{CurrentGroupePrestation.TitreGroupe}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+    {{>Header}}
+
+    <main>
+        <!-- SECTION BANNER -->
+        <section class="section-title-BG bg-img" style="background-image: url({{#CurrentGroupePrestation.PhotoGroupe}}{{UrlMedias}}/crop-2200x800/{{IdMedia}}/{{FileNamePhoto}}{{/CurrentGroupePrestation.PhotoGroupe}}{{^CurrentGroupePrestation.PhotoGroupe}}{{#Photos.0}}{{UrlMedias}}/crop-2200x800/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/CurrentGroupePrestation.PhotoGroupe}}); " alt="{{NamePhoto}}">
+            <div class="opacity">
+                <div class="content-section big-title-contain">
+                    <h1 class="big-title hidden-title">{{CurrentGroupePrestation.TitreGroupe}}</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION OFFRES -->
+        <section class="section section-prestas">
+            <div class="content-section">
+
+                <div class="presta-big-contain presta-big-contain-in-others-pages">
+                    {{#CurrentGroupePrestation.PrestasGroupe}}
+                    <div class="presta-contain bg-img presta-contain-offers presta-contain-offers-in-offers" style="background-image: url({{#PhotosPresta.0}}{{UrlMedias}}/crop-700x500/{{IdMedia}}/{{FileNamePhoto}}{{/PhotosPresta.0}}); " draggable="false">
+                        <div class="opacity-3">
+                            <div class="opacity-hover">
+                                <div class="title-presta-contain">
+                                    <h3>{{TitrePresta}}</h3>
+                                </div>
+
+                                <div class="infos infos-offers-in-offers">
+                                    <div class="price-and-infos-base">
+                                        <div class="price-and-duration-prestas">
+                                            {{#MinPricePresta}}
+                                            <div class="price-presta">
+                                                <span class="price-begin">{{ResourcesTemplate.PriceFrom}}</span>
+                                                <span class="presta-price"><strong>{{MinPricePresta}}{{CurrencySymbol}}</strong></span>
+                                            </div>
+                                            {{/MinPricePresta}}
+
+                                            {{#DurationPresta}}
+                                            <div class="infos-base-line">
+                                                <i class="las la-clock"></i>
+                                                <div>{{DurationResume}}</div>
+                                            </div>
+                                            {{/DurationPresta}}
+                                        </div>
+
+                                        <div class="infos-base">
+                                            {{#AgeMinimum}}
+                                            <div class="infos-base-line">
+                                                <i class="las la-birthday-cake"></i>
+                                                <div>
+                                                    {{#AgeMaximum}}{{ResourcesTemplate.AgeFrom}} {{/AgeMaximum}}
+                                                    {{^AgeMaximum}}{{ResourcesTemplate.AgeStartingFrom}} {{/AgeMaximum}}
+                                                    {{AgeMinimum}} {{#AgeMaximum}}{{ResourcesTemplate.AgeTo}} {{AgeMaximum}} {{/AgeMaximum}}{{ResourcesTemplate.AgeYears}}
+                                                </div>
+                                            </div>
+                                            {{/AgeMinimum}}
+
+                                            {{#Difficulty}}
+                                            <div class="infos-base-line">
+                                                <i class="las la-level-up-alt"></i>
+                                                <div>{{ResourcesTemplate.Difficulty}} {{Difficulty}} / 5</div>
+                                            </div>
+                                            {{/Difficulty}}
+
+                                            {{#IsAdultRequired}}
+                                            <div class="infos-base-line">
+                                                <i class="las la-user-check"></i>
+                                                <div>{{ResourcesTemplate.AdultAccompaniment}} : {{{ResourcesTemplate.Required}}}</div>
+                                            </div>
+                                            {{/IsAdultRequired}}
+                                        </div>
+                                    </div>
+
+                                    {{#DescriptionPresta}}
+                                    <div class="description-presta-offers">{{{DescriptionPresta}}}</div>
+                                    {{/DescriptionPresta}}
+
+                                    <a href="{{UrlPrestaTemplate}}" class="link-btn" itemprop="url">{{ResourcesTemplate.SeeDetail}}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/CurrentGroupePrestation.PrestasGroupe}}
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION CALENDAR -->
+        {{#HasCalendarActivated}}
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        <!-- SECTION NEWSLETTER -->
+        {{#HasNewsletterActivated}}
+        {{>Newsletter2}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    
+</body>
+
+</html>

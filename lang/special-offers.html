@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.SpecialOffers}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{MetaDescriptionSpecialOffers}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlSpecialOffers}}" />
+    <meta property="og:url" content="{{UrlSpecialOffers}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.SpecialOffers}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{MetaDescriptionSpecialOffers}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+    {{#HasBookingActivated}}{{>ScriptCalendarClick}}{{/HasBookingActivated}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+    {{>Header}}
+
+    <main>
+        <!-- SECTION BANNER -->
+        <section class="section-title-BG bg-img" style="background-image: url({{#Photos.0}}{{UrlMedias}}/crop-2200x800/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}); " alt="{{NamePhoto}}">
+            <div class="opacity">
+                <div class="content-section big-title-contain">
+                    <h1 class="big-title hidden-title">{{ResourcesTemplate.ExclusivePromotions}}</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION OFFRES SPECIALES -->
+        {{#HasSpecialOffers}}
+        <section class="section section-prestas">
+            <div class="content-section">
+
+                <div class="presta-big-contain presta-big-contain-special-offers presta-big-contain-special-offers-in-special-offers">
+                    {{#SpecialOffers}}
+                    <div class="presta-contain presta-contain-special-offers bg-img" style="background-image: url({{#FirstPhotoSpecialOffer}}{{UrlMedias}}/crop-700x500/{{IdMedia}}/{{FileNamePhoto}}{{/FirstPhotoSpecialOffer}}{{^FirstPhotoSpecialOffer}}https://static.elloha.com/webgen/img/special-offer.png{{/FirstPhotoSpecialOffer}}); " draggable="false">
+                        <div class="opacity-3">
+                            <div class="opacity-hover">
+                                <div class="title-presta-contain">
+                                    <h3>{{TitleSpecialOffer}}</h3>
+
+                                    {{#AmountPromo}}
+                                    <span class="presta-price-special-offers">{{SignPromo}}{{AmountPromo}}{{UnitPromo}}</span>
+                                    {{/AmountPromo}}
+                                </div>
+
+                                <div class="infos">
+                                    <div class="date-and-related-special-offers">
+                                        <div class="infos-base infos-base-special-offers">
+                                            {{^IsEarlyBirdOrLastMinute}}
+                                            {{#DateFromSpecialOfferString}}
+                                            <div class="date-os">{{ResourcesTemplate.DateFrom}} {{DateFromSpecialOfferString}}</div>
+                                            <div class="date-os">{{ResourcesTemplate.DateTo}} </div>
+                                            {{/DateFromSpecialOfferString}}
+
+                                            {{^DateFromSpecialOfferString}}
+                                            {{#DateToSpecialOfferString}}
+                                            <div class="date-os">{{ResourcesTemplate.DateUntil}} </div>
+                                            {{/DateToSpecialOfferString}}
+                                            {{/DateFromSpecialOfferString}}
+
+                                            {{#DateToSpecialOfferString}}
+                                            <div class="date-os">{{DateToSpecialOfferString}}</div>
+                                            {{/DateToSpecialOfferString}}
+
+                                            <div class="date-os">{{DeadlineStringSpecialOffer}}</div>
+                                            {{/IsEarlyBirdOrLastMinute}}
+
+                                            {{#LastMinute}}
+                                            <div class="date-os">{{ResourcesTemplate.RightNow}}</div>
+                                            {{/LastMinute}}
+                                            {{#EarlyBird}}
+                                            <div class="date-os">{{ResourcesTemplate.BookEarly}}</div>
+                                            {{/EarlyBird}}
+                                            {{#MinStayStringSpecialOffer}}
+                                            <div>{{MinStayStringSpecialOffer}}</div>
+                                            {{/MinStayStringSpecialOffer}}
+                                        </div>
+
+                                        {{^IsRestaurant}}
+                                        <div class="special-offer-related">
+                                            <strong>{{ResourcesTemplate.Valid}} <span class="lowercase">{{ResourcesTemplate.For}}</span> :</strong>
+                                            {{#PrestasSpecialOfferList}}{{TitrePresta}}<span class="separator">|</span>{{/PrestasSpecialOfferList}}
+                                        </div>
+                                        {{/IsRestaurant}}
+                                    </div>
+
+                                    <div class="btn-contain">
+                                        <div class="opacity-btn-hover">
+                                            <a href="{{{UrlBECustom}}}/Search/Index/{{IdPubBe}}?idoi={{IdOi}}&searchFirstAvailableDates=1&culture={{CurrentLang.CultureLang}}&forcedTemplate={{UrlTemplateBE}}" class="btn" itemprop="url">{{ResourcesTemplate.Book}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/SpecialOffers}}
+                </div>
+            </div>
+        </section>
+        {{/HasSpecialOffers}}
+
+        <!-- SECTION CALENDAR -->
+        {{#HasCalendarActivated}}
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        <!-- SECTION NEWSLETTER -->
+        {{#HasNewsletterActivated}}
+        {{>Newsletter2}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    
+</body>
+
+</html>

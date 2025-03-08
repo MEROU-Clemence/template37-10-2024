@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.NewsPageTitle}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{MetaDescriptionNews}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlNews}}" />
+    <meta property="og:url" content="{{UrlNews}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.NewsPageTitle}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{MetaDescriptionNews}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+    {{>Header}}
+
+    <main>
+        <!-- SECTION BANNER -->
+        <section class="section-title-BG bg-img" style="background-image: url({{Url}}/img/news-book.jpg)" alt="{{NamePhoto}}">
+            <div class="opacity">
+                <div class="content-section big-title-contain">
+                    <h1 class="big-title hidden-title">{{ResourcesTemplate.TheNews}}</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION OTHERS PAGES -->
+        <div class="section-others-pages">
+            <div class="content-section">
+
+                <div class="others-pages">
+                    <div class="owl-carousel owl-theme slider-others-pages">
+                        {{#NewsList}}
+                        <a href="#{{IdNews}}">{{TitleNews}}</a>
+                        {{/NewsList}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION NEWS -->
+        <div class="section section-news section-news-in-news">
+            <div class="content-section content-news content-news-in-news">
+
+                {{#NewsList}}
+                <div class="photo-page-and-descrip photo-page-and-descrip-in-news" id="{{IdNews}}" data-pagination-item>
+                    <div class="photo-page-page photo-page-page-in-news">
+                        {{#ListPhotoNews.0}}
+                        {{#ListPhotoNews.1}}
+                        <div class="owl-wrapper">
+                            <div class="owl-carousel owl-theme slider-page-page">
+                                {{#ListPhotoNews}}
+                                <div class="photo-page photo-page-in-news">
+                                    <img src="{{UrlMedias}}/crop-750x560/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}">
+                                </div>
+                                {{/ListPhotoNews}}
+                            </div>
+                        </div>
+                        {{/ListPhotoNews.1}}
+                        {{^ListPhotoNews.1}}
+                        {{#ListPhotoNews}}
+                        <div class="photo-page photo-page-in-news">
+                            <img src="{{UrlMedias}}/crop-750x560/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}">
+                        </div>
+                        {{/ListPhotoNews}}
+                        {{/ListPhotoNews.1}}
+                        {{/ListPhotoNews.0}}
+
+                        {{^ListPhotoNews.0}}
+                        <div class="photo-page photo-page-in-news">
+                            <img src="https://static.elloha.com/webgen/img/news.jpg" alt="{{NamePhoto}}">
+                        </div>
+                        {{/ListPhotoNews.0}}
+                    </div>
+
+                    <div class="description-page-contain description-page-contain-in-news">
+                        <div class="title-and-date-in-news">
+                            <span>{{ArticleCreatedOn}} {{DateNewsString}}</span>
+
+                            <h2>{{TitleNews}}</h2>
+                        </div>
+
+                        <div class="description-page">{{{TextNews}}}</div>
+                    </div>
+                </div>
+                {{/NewsList}}
+
+            </div>
+        </div>
+
+        <!-- SECTION NEWSLETTER -->
+        {{#HasNewsletterActivated}}
+        {{>Newsletter2}}
+        {{/HasNewsletterActivated}}
+
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    
+</body>
+</html>
